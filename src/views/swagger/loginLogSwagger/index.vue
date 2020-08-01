@@ -1,13 +1,13 @@
 <template>
-  <div id="swagger">
-    <iframe src="http://localhost:8002/swagger-ui.html" id="mobsf"
+  <div id="LoginLogSwagger">
+    <iframe src="http://localhost:8003/swagger-ui.html" id="mobsf"
             frameborder="0" style="position:absolute;"></iframe>
   </div>
 </template>
 
 <script>
   export default {
-    name: "swagger",
+    name: "LoginLogSwagger",
     data() {
       return {}
     },

@@ -135,22 +135,26 @@
     </el-pagination>
     <el-dialog :title="title" :visible.sync="dialogFormVisible" width="900px">
       <el-form :model="userVO" :rules="rules" ref="userVO">
-        <el-form-item label="用户名" prop="username" label-width="80px">
-          <el-input v-model="userVO.username" :disabled="userVO.id!=null&&userVO.id!=''"></el-input>
+        <el-form-item label="用户名" prop="username" label-width="80px" style="display: inline-block">
+          <el-input v-model="userVO.username"
+                    :disabled="userVO.id!=null&&userVO.id!=''"
+                    style="width: 300px"></el-input>
         </el-form-item>
         <el-form-item label="部门"
                       prop="departmentId"
-                      label-width="80px">
+                      label-width="80px"
+                      style="display: inline-block">
           <el-select v-model="userVO.departmentId" placeholder="请选择所属部门">
             <el-option :label="department.name" :value="department.id" v-for="department in departments"></el-option>
           </el-select>
         </el-form-item>
-        <el-form-item label="呢称" prop="nickname" label-width="80px">
-          <el-input v-model="userVO.nickname"></el-input>
+        <el-form-item label="呢称" prop="nickname" label-width="80px" style="display: inline-block">
+          <el-input v-model="userVO.nickname" style="width: 300px"></el-input>
         </el-form-item>
         <el-form-item label="性别"
                       prop="sex"
-                      label-width="80px">
+                      label-width="80px"
+                      style="display: inline-block">
           <el-radio v-model="userVO.sex" :label="0">男</el-radio>
           <el-radio v-model="userVO.sex" :label="1">女</el-radio>
         </el-form-item>
@@ -165,7 +169,7 @@
         </el-form-item>
         <el-form-item label="生日" prop="birth" label-width="80px">
           <el-date-picker type="date" placeholder="选择出生日期" v-model="userVO.birth"
-                          style="width: 100%;"></el-date-picker>
+                          style="width: 350px"></el-date-picker>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -177,9 +181,11 @@
 </template>
 
 <script>
-  import {getList, getDepartment, del, add, upd, getUser, exportExcel} from '@/api/table'
+  import {getList, del, add, upd, getUser, exportExcel} from '@/api/user'
+  import {getDepartment} from "@/api/department";
 
   export default {
+    name: "User",
     filters: {
       statusFilter(status) {
         const statusMap = {
@@ -197,8 +203,6 @@
           return callback(new Error('请输入联系方式'))
         }
         setTimeout(() => {
-          // Number.isInteger是es6验证数字是否为整数的方法,但是我实际用的时候输入的数字总是识别成字符串
-          // 所以我就在前面加了一个+实现隐式转换
           if (!Number.isInteger(+value)) {
             callback(new Error('请输入联系方式'))
           } else {
@@ -288,6 +292,11 @@
       dialogFormVisible(val) {
         if (!this.dialogFormVisible) {
           this.changeUser()
+          this.rules.departmentId[0].required = false
+          this.rules.birth[0].required = false
+        } else {
+          this.rules.departmentId[0].required = true
+          this.rules.birth[0].required = true
         }
       }
     },
@@ -324,42 +333,23 @@
       },
       resetForm(formName) {
         this.$refs[formName].resetFields();
+        this.fetchData();
       },
       handleDelete(id) {
         del(id).then(response => {
-          if (response.success) {
-            alert("删除成功")
-            this.fetchData()
-            this.getDepartments()
-          } else {
-            alert("删除失败")
-          }
+          this.success(response, '删除', false);
         })
       },
       edit() {
         if (this.userVO.id == null || this.userVO.id == '') {
           this.title = '添加用户'
           add(this.userVO).then(response => {
-            if (response.success) {
-              alert("新增成功")
-              this.dialogFormVisible = false
-              this.fetchData()
-              this.getDepartments()
-            } else {
-              alert("新增失败")
-            }
+            this.success(response, '新增', true);
           })
         } else {
           this.title = '修改用户'
           upd(this.userVO).then(response => {
-            if (response.success) {
-              alert("修改成功")
-              this.dialogFormVisible = false
-              this.fetchData()
-              this.getDepartments()
-            } else {
-              alert("修改失败")
-            }
+            this.success(response, '修改', true);
           })
         }
       },
@@ -379,17 +369,38 @@
       handleEdit(id) {
         getUser(id).then(response => {
           this.userVO = response.data
+          this.userVO.birth = new Date(response.data.birth.replace(/-/g, "/"))
           this.dialogFormVisible = true
         })
       },
       updStatus(status, id) {
         upd({status: status, id: id}).then(response => {
+          this.success(response, '修改', false);
         })
+      },
+      success(response, type, dialogFormVisible) {
+        if (response.success) {
+          this.$notify({
+            title: '成功',
+            message: type + '成功',
+            type: 'success'
+          });
+          if (dialogFormVisible) {
+            this.dialogFormVisible = false
+          }
+          this.fetchData()
+          this.getDepartments()
+        } else {
+          this.$notify.error({
+            title: '失败',
+            message: type + '失败'
+          });
+        }
       },
       exportExcelUser() {
         exportExcel(this.tbUserVO).then(response => {
           debugger
-          let blob = new Blob([response], { type: 'application/xlsx' })
+          let blob = new Blob([response], {type: 'application/xlsx'})
           let url = window.URL.createObjectURL(blob)
           const link = document.createElement('a') // 创建a标签
           link.href = url

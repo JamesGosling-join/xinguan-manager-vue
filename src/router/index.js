@@ -33,6 +33,7 @@ import Layout from '@/layout'
 export const constantRoutes = [
   {
     path: '/login',
+    name: 'Login',
     component: () => import('@/views/login/index'),
     hidden: true
   },
@@ -46,54 +47,51 @@ export const constantRoutes = [
   {
     path: '/',
     component: Layout,
-    redirect: '/dashboard',
+    redirect: '/',
+    meta: {title: '系统管理', icon: 'el-icon-setting'},
     children: [{
-      path: 'dashboard',
+      path: '/',
       name: 'Dashboard',
-      component: () => import('@/views/dashboard/index'),
+      component: () => import('@/views/dashboard/manager/index'),
       meta: {title: '系统首页', icon: 'el-icon-star-off'}
-    }]
-  },
-
-  {
-    path: '/example',
-    component: Layout,
-    redirect: '/example/table',
-    name: 'Example',
-    meta: {title: '用户管理', icon: 'el-icon-s-home'},
-    children: [
+    },
       {
-        path: 'table',
-        name: 'Table',
-        component: () => import('@/views/user/index'),
-        meta: {title: '用户信息', icon: 'el-icon-s-custom'}
+        path: 'user',
+        name: 'User',
+        component: () => import('@/views/dashboard/user/index'),
+        meta: {title: '用户管理', icon: 'el-icon-s-custom'}
       },
       {
-        path: 'tree',
-        name: 'Tree',
-        component: () => import('@/views/tree/index'),
-        meta: {title: 'Tree', icon: 'tree'}
-      }
-    ]
+        path: 'department',
+        name: 'Department',
+        component: () => import('@/views/dashboard/department/index'),
+        meta: {title: '部门管理', icon: 'el-icon-s-home'}
+      }]
   },
   {
     path: '/swagger',
     name: 'Swagger',
     component: Layout,
     redirect: '/swagger/userSwagger',
-    meta: {title: 'swagger', icon: 'el-icon-notebook-1'},
+    meta: {title: '文档管理', icon: 'el-icon-notebook-1'},
     children: [
       {
         path: 'userSwagger',
         name: 'UserSwagger',
-        component: () => import('@/views/userSwagger/index'),
-        meta: {title: 'UserSwagger', icon: 'el-icon-notebook-2'}
+        component: () => import('@/views/swagger/userSwagger/index'),
+        meta: {title: '用户文档', icon: 'el-icon-notebook-2'}
       },
       {
         path: 'departmentSwagger',
         name: 'DepartmentSwagger',
-        component: () => import('@/views/departmentSwagger/index'),
-        meta: {title: 'DepartmentSwagger', icon: 'el-icon-notebook-2'}
+        component: () => import('@/views/swagger/departmentSwagger/index'),
+        meta: {title: '部门文档', icon: 'el-icon-notebook-2'}
+      },
+      {
+        path: 'loginLogSwagger',
+        name: 'LoginLogSwagger',
+        component: () => import('@/views/swagger/loginLogSwagger/index'),
+        meta: {title: '日志文档', icon: 'el-icon-notebook-2'}
       }
     ]
   },
@@ -101,20 +99,21 @@ export const constantRoutes = [
     path: '/log',
     name: 'Log',
     component: Layout,
-    redirect: '/swagger/userSwagger',
+    redirect: '/log/loginLog',
     meta: {title: '日志管理', icon: 'el-icon-s-management'},
     children: [
       {
-        path: 'userSwagger',
-        name: 'UserSwagger',
-        component: () => import('@/views/loginLog/index'),
-        meta: {title: '登录日志', icon: 'el-icon-date'
+        path: 'loginLog',
+        name: 'LoginLog',
+        component: () => import('@/views/log/loginLog/index'),
+        meta: {
+          title: '登录日志', icon: 'el-icon-date'
         }
       },
       {
-        path: 'departmentSwagger',
-        name: 'DepartmentSwagger',
-        component: () => import('@/views/handleLog/index'),
+        path: 'handelLog',
+        name: 'HandelLog',
+        component: () => import('@/views/log/log/index'),
         meta: {title: '操作日志', icon: 'el-icon-edit-outline'}
       }
     ]
@@ -124,7 +123,7 @@ export const constantRoutes = [
 ]
 
 const createRouter = () => new Router({
-  // mode: 'history', // require service support
+  mode: 'history', // require service support
   scrollBehavior: () => ({y: 0}),
   routes: constantRoutes
 })

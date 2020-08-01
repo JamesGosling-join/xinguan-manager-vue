@@ -1,4 +1,4 @@
-import {login, logout, getInfo} from '@/api/user'
+import {login, logout, getInfo} from '@/api/login'
 import {getToken, setToken, removeToken} from '@/utils/auth'
 import {resetRouter} from '@/router'
 import current from "element-ui/packages/table/src/store/current";

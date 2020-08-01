@@ -1,5 +1,5 @@
 <template>
-  <div id="swagger">
+  <div id="UserSwagger">
     <iframe src="http://localhost:8001/swagger-ui.html" id="mobsf"
             frameborder="0" style="position:absolute;"></iframe>
   </div>
@@ -7,7 +7,7 @@
 
 <script>
   export default {
-    name: "swagger",
+    name: "UserSwagger",
     data() {
       return {}
     },

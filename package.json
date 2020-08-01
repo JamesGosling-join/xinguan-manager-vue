@@ -1,7 +1,7 @@
 {
   "name": "xinguan-manager",
   "version": "4.4.0",
-  "description": "新冠管理系统",
+  "description": "新冠物资管理系统",
   "author": "QuanJun <2748905013@qq.com>",
   "scripts": {
     "dev": "vue-cli-service serve",
