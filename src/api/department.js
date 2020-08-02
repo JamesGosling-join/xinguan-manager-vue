@@ -50,7 +50,7 @@ export function updById(data) {
 
 export function exportExcel(name) {
   return request({
-    url: '/userservice/department/export',
+    url: '/departmentservice/department/export',
     method: 'get',
     params: {
       name

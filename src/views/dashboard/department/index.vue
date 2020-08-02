@@ -96,7 +96,7 @@
                       prop="mgrId"
                       label-width="80px">
           <el-select v-model="departmentVO.mgrId" placeholder="请选择部门主任">
-            <el-option :label="user.name" :value="user.id" v-for="user in users"></el-option>
+            <el-option :label="user.username" :value="user.id" v-for="user in users"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item label="办公电话" prop="phone" label-width="80px">
@@ -112,7 +112,7 @@
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="dialogFormVisible = false">取 消</el-button>
-        <el-button type="primary" @click="submitForm('userVO')">确 定</el-button>
+        <el-button type="primary" @click="submitForm('departmentVO')">确 定</el-button>
       </div>
     </el-dialog>
   </div>
@@ -272,7 +272,7 @@
           let url = window.URL.createObjectURL(blob)
           const link = document.createElement('a') // 创建a标签
           link.href = url
-          link.download = '用户信息表.xlsx' // 重命名文件
+          link.download = '部门信息表.xlsx' // 重命名文件
           link.click()
           URL.revokeObjectURL(url)
         })

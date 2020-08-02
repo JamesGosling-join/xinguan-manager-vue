@@ -47,10 +47,10 @@ export const constantRoutes = [
   {
     path: '/',
     component: Layout,
-    redirect: '/',
+    redirect: '/dashboard',
     meta: {title: '系统管理', icon: 'el-icon-setting'},
     children: [{
-      path: '/',
+      path: '/dashboard',
       name: 'Dashboard',
       component: () => import('@/views/dashboard/manager/index'),
       meta: {title: '系统首页', icon: 'el-icon-star-off'}
