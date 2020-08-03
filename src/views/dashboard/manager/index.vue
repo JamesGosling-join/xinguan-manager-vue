@@ -1,9 +1,7 @@
 <template>
   <div class="dashboard-container">
-    <div class="dashboard-text">name: {{ name }}</div>
-    <div class="demo-basic--circle">
-        <el-avatar :size="120" :src="avatar+'?imageView2/1/w/80/h/80'"></el-avatar>
-    </div>
+    <div class="dashboard-text">用户名: {{ name }}</div>
+    <pan-thumb :image="avatar+'?imageView2/1/w/80/h/80'"/>
     <el-button type="success" icon="el-icon-plus" @click="dialogVisible=true">更换头像</el-button>
     <el-dialog
       title="提示"
