@@ -23,3 +23,21 @@ export function logout() {
   })
 }
 
+export function sendSMS(phoneNumber) {
+  return request({
+    url: '/userservice/login/sendSMS',
+    method: 'post',
+    params: {
+      phoneNumber
+    }
+  })
+}
+
+export function register(data) {
+  return request({
+    url: '/userservice/login/register',
+    method: 'post',
+    data
+  })
+}
+

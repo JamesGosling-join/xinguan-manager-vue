@@ -1,4 +1,4 @@
-import {login, logout, getInfo} from '@/api/login'
+import {login, logout, getInfo, register, sendSMS} from '@/api/login'
 import {getToken, setToken, removeToken} from '@/utils/auth'
 import {resetRouter} from '@/router'
 import current from "element-ui/packages/table/src/store/current";
@@ -34,6 +34,32 @@ const actions = {
     const {username, password} = userInfo
     return new Promise((resolve, reject) => {
       login({username: username.trim(), password: password}).then(response => {
+        const {data} = response
+        commit('SET_TOKEN', data)
+        setToken(data)
+        resolve()
+      }).catch(error => {
+        reject(error)
+      })
+    })
+  },
+
+  sendSMS({commit}, userInfo) {
+    return new Promise((resolve, reject) => {
+      sendSMS(userInfo).then(response => {
+        const {data} = response
+        commit('SET_TOKEN', data)
+        setToken(data)
+        resolve()
+      }).catch(error => {
+        reject(error)
+      })
+    })
+  },
+
+  register({commit}, userInfo) {
+    return new Promise((resolve, reject) => {
+      register(userInfo).then(response => {
         const {data} = response
         commit('SET_TOKEN', data)
         setToken(data)

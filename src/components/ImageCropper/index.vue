@@ -141,7 +141,6 @@ import language from './utils/language.js'
 import mimes from './utils/mimes.js'
 import data2blob from './utils/data2blob.js'
 import effectRipple from './utils/effectRipple.js'
-import store from '@/store'
 
 export default {
   props: {
@@ -798,7 +797,6 @@ export default {
         data: fmData
       })
         .then(resData => {
-          store.state.user.avatar=resData.data
           this.loading = 2
           this.$emit('crop-upload-success', resData.data)
         })

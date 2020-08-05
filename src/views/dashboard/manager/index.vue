@@ -64,15 +64,13 @@
       return {
         dialogVisible: false,
         imgFormVisible: false,
-        imgKey: 0,
-        image: ''
+        imgKey: 0
       }
     },
     methods:{
       cropSuccess(data) {
-        console.log(data)
+        this.$store.state.user.avatar=data
         this.imgFormVisible = false
-        this.image = data.url;
         // 上传成功后，重新打开上传组件时初始化组件，否则显示上一次的上传结果
         this.imgKey = this.imgKey + 1
       },
