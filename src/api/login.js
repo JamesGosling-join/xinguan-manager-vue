@@ -41,3 +41,13 @@ export function register(data) {
   })
 }
 
+export function captcha(key) {
+  return request({
+    url: '/userservice/login/captcha',
+    method: 'get',
+    params:{
+      key
+    }
+  })
+}
+

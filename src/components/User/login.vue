@@ -40,7 +40,24 @@
           <svg-icon :icon-class="passwordType === 'password' ? 'eye' : 'eye-open'"/>
         </span>
       </el-form-item>
-
+      <el-form-item prop="code" style="display: inline-block;width: 70%;margin-right: 5%;vertical-align:middle;">
+        <span class="svg-container">
+          <i class="el-icon-star-on"></i>
+        </span>
+        <el-input
+          ref="code"
+          v-model="loginForm.code"
+          placeholder="Code"
+          name="code"
+          type="text"
+          tabindex="3"
+          auto-complete="on"
+        />
+      </el-form-item>
+      <el-button style="width:25%;margin-bottom:30px;padding: 0"
+                 @click.native.prevent="img">
+        <img :src="imgPath" width="100px" height="100%"/>
+      </el-button>
       <el-button :loading="loading" type="primary" style="width:100%;margin-bottom:30px;"
                  @click.native.prevent="handleLogin">登录
       </el-button>
@@ -71,18 +88,20 @@
       }
       return {
         loginForm: {
+          code: '',
           username: '',
-          password: ''
+          password: '',
+          key: ''
         },
         loginRules: {
+          code : [{required: true, trigger: 'blur', message: '请输入验证码'}],
           username: [{required: true, trigger: 'blur', validator: validateUsername}],
           password: [{required: true, trigger: 'blur', validator: validatePassword}]
         },
         loading: false,
         passwordType: 'password',
         redirect: undefined,
-        current: 1,
-        size: 5
+        imgPath: ''
       }
     },
     watch: {
@@ -120,9 +139,18 @@
           }
         })
       },
-      show(){
-        this.$parent.show=false
+      show() {
+        this.$parent.show = false
+      },
+      img() {
+        this.$store.dispatch('user/captcha',this.loginForm.key).then(response => {
+          this.imgPath = response.image
+          this.loginForm.key = response.key
+        })
       }
+    },
+    created() {
+      this.img()
     }
   }
 </script>

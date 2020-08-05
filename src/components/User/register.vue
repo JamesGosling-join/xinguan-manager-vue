@@ -112,7 +112,7 @@
           phoneNumber: ''
         },
         registerRules: {
-          code: [{required: true, trigger: 'blur', message: '请输入验证码'}],
+          code : [{required: true, trigger: 'blur', message: '请输入验证码'}],
           username: [{required: true, trigger: 'blur', message: '请输入用户名'}],
           password: [{required: true, trigger: 'blur', message: '请输入密码'}],
           phoneNumber: [{required: true, trigger: 'blur', validator: checkPhone}],
@@ -121,8 +121,6 @@
         passwordType: 'password',
 
         redirect: undefined,
-        current: 1,
-        size: 5,
         msg: '获取验证码'
       }
     },

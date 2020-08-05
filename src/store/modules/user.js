@@ -1,4 +1,4 @@
-import {login, logout, getInfo, register, sendSMS} from '@/api/login'
+import {login, logout, getInfo, register, sendSMS, captcha} from '@/api/login'
 import {getToken, setToken, removeToken} from '@/utils/auth'
 import {resetRouter} from '@/router'
 import current from "element-ui/packages/table/src/store/current";
@@ -31,9 +31,8 @@ const mutations = {
 const actions = {
   // user login
   login({commit}, userInfo) {
-    const {username, password} = userInfo
     return new Promise((resolve, reject) => {
-      login({username: username.trim(), password: password}).then(response => {
+      login(userInfo).then(response => {
         const {data} = response
         commit('SET_TOKEN', data)
         setToken(data)
@@ -64,6 +63,17 @@ const actions = {
         commit('SET_TOKEN', data)
         setToken(data)
         resolve()
+      }).catch(error => {
+        reject(error)
+      })
+    })
+  },
+
+  captcha({commit}, userInfo) {
+    return new Promise((resolve, reject) => {
+      captcha(userInfo).then(response => {
+        const {data} = response
+        resolve(data)
       }).catch(error => {
         reject(error)
       })
