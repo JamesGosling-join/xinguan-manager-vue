@@ -28,6 +28,7 @@ if (process.env.NODE_ENV === 'production') {
   const { mockXHR } = require('../mock')
   mockXHR()
 }
+
 Vue.prototype.$echarts = Echarts
 // set ElementUI lang to EN
 Vue.use(ElementUI, { locale })
