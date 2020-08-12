@@ -7,7 +7,7 @@
 
 <script>
   export default {
-    name: "LoginLogSwagger",
+    name: "LogServiceSwagger",
     data() {
       return {}
     },

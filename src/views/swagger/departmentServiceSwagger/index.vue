@@ -7,7 +7,7 @@
 
 <script>
   export default {
-    name: "DepartmentSwagger",
+    name: "DepartmentServiceSwagger",
     data() {
       return {}
     },

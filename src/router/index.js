@@ -69,29 +69,28 @@ export const constantRoutes = [
       }]
   },
   {
-    path: '/swagger',
-    name: 'Swagger',
+    path: '/business ',
+    name: 'Business ',
     component: Layout,
-    redirect: '/swagger/userSwagger',
-    meta: {title: '文档管理', icon: 'el-icon-notebook-1'},
+    meta: {title: '业务管理', icon: 'el-icon-s-cooperation'},
     children: [
       {
-        path: 'userSwagger',
-        name: 'UserSwagger',
-        component: () => import('@/views/swagger/userSwagger/index'),
-        meta: {title: '用户文档', icon: 'el-icon-notebook-2'}
-      },
-      {
-        path: 'departmentSwagger',
-        name: 'DepartmentSwagger',
-        component: () => import('@/views/swagger/departmentSwagger/index'),
-        meta: {title: '部门文档', icon: 'el-icon-notebook-2'}
-      },
-      {
-        path: 'loginLogSwagger',
-        name: 'LoginLogSwagger',
-        component: () => import('@/views/swagger/loginLogSwagger/index'),
-        meta: {title: '日志文档', icon: 'el-icon-notebook-2'}
+        path: 'materials',
+        name: 'Materials',
+        component:()=>import('@/views/business/materials/index'),
+        meta: {
+          title: '物资管理', icon: 'el-icon-date'
+        },
+        children: [
+          {
+            path: 'repertory',
+            name: 'Repertory',
+            component: () => import('@/views/business/materials/repertory/index'),
+            meta: {
+              title: '物资库存', icon: 'el-icon-edit'
+            }
+          }
+        ]
       }
     ]
   },
@@ -115,6 +114,55 @@ export const constantRoutes = [
         name: 'HandelLog',
         component: () => import('@/views/log/log/index'),
         meta: {title: '操作日志', icon: 'el-icon-edit-outline'}
+      }
+    ]
+  },
+  {
+    path: '/other',
+    name: 'Other',
+    component: Layout,
+    meta: {title: '其它管理', icon: 'el-icon-s-management'},
+    children: [
+      {
+        path: 'icons',
+        name: 'Icons',
+        component: () => import('@/views/other/icons/index'),
+        meta: {
+          title: '图标管理', icon: 'el-icon-edit'
+        }
+      }
+    ]
+  },
+  {
+    path: '/swagger',
+    name: 'Swagger',
+    component: Layout,
+    redirect: '/swagger/userServiceSwagger',
+    meta: {title: '文档管理', icon: 'el-icon-notebook-1'},
+    children: [
+      {
+        path: 'userServiceSwagger',
+        name: 'UserServiceSwagger',
+        component: () => import('@/views/swagger/userServiceSwagger/index'),
+        meta: {title: '用户文档', icon: 'el-icon-notebook-2'}
+      },
+      {
+        path: 'departmentServiceSwagger',
+        name: 'DepartmentServiceSwagger',
+        component: () => import('@/views/swagger/departmentServiceSwagger/index'),
+        meta: {title: '部门文档', icon: 'el-icon-notebook-2'}
+      },
+      {
+        path: 'logServiceSwagger',
+        name: 'LogServiceSwagger',
+        component: () => import('@/views/swagger/logServiceSwagger/index'),
+        meta: {title: '日志文档', icon: 'el-icon-notebook-2'}
+      },
+      {
+        path: 'repertoryServiceSwagger',
+        name: 'RepertoryServiceSwagger',
+        component: () => import('@/views/swagger/repertoryServiceSwagger/index'),
+        meta: {title: '物资文档', icon: 'el-icon-notebook-2'}
       }
     ]
   },

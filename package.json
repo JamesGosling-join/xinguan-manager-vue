@@ -3,6 +3,7 @@
   "version": "4.4.0",
   "description": "新冠物资管理系统",
   "author": "QuanJun <2748905013@qq.com>",
+  "private": true,
   "scripts": {
     "dev": "vue-cli-service serve",
     "build:prod": "vue-cli-service build",
@@ -16,6 +17,7 @@
   "dependencies": {
     "axios": "0.18.1",
     "core-js": "3.6.5",
+    "echarts": "^4.8.0",
     "element-ui": "2.13.2",
     "js-cookie": "2.2.0",
     "normalize.css": "7.0.0",

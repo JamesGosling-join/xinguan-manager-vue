@@ -4,7 +4,7 @@
              label-position="left">
 
       <div class="title-container">
-        <h3 class="title">Register Form</h3>
+        <h3 class="title">注册</h3>
       </div>
       <el-form-item prop="username">
         <span class="svg-container">
@@ -13,7 +13,7 @@
         <el-input
           ref="username"
           v-model="registerForm.username"
-          placeholder="Username"
+          placeholder="用户"
           name="username"
           type="text"
           tabindex="1"
@@ -29,7 +29,7 @@
           ref="password"
           v-model="registerForm.password"
           :type="passwordType"
-          placeholder="Password"
+          placeholder="密码"
           name="password"
           tabindex="2"
           auto-complete="on"
@@ -47,7 +47,7 @@
         <el-input
           ref="phoneNumber"
           v-model="registerForm.phoneNumber"
-          placeholder="PhoneNumber"
+          placeholder="手机号"
           name="phoneNumber"
           type="text"
           tabindex="3"
@@ -61,7 +61,7 @@
         <el-input
           ref="code"
           v-model="registerForm.code"
-          placeholder="Code"
+          placeholder="验证码"
           name="code"
           type="text"
           tabindex="4"

@@ -51,8 +51,7 @@
         sortable
         width="120%">
         <template slot-scope="scope">
-          <el-tag
-            disable-transitions type="success">{{scope.row.time}}毫秒
+          <el-tag type="success">{{scope.row.time}}毫秒
           </el-tag>
         </template>
       </el-table-column>
@@ -171,13 +170,6 @@
         } else {
           this.disabled = true
         }
-      },
-      showDiv(row, column, cell, event) {
-        alert("aaa")
-        /*alert(JSON.stringify(row))
-        alert(JSON.stringify(column))
-        alert(JSON.stringify(cell))
-        alert(JSON.stringify(event))*/
       }
     },
     created() {

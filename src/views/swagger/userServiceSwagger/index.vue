@@ -7,7 +7,7 @@
 
 <script>
   export default {
-    name: "UserSwagger",
+    name: "UserServiceSwagger",
     data() {
       return {}
     },
