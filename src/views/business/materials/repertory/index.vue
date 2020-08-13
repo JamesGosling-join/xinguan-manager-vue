@@ -105,10 +105,11 @@
       },
       findCategory() {
         findCategory().then(response => {
-          this.options = this.getTreeData(response.data)
+          this.options=response.data
+          //this.options = this.getTreeData(response.data)
         })
       },
-      getTreeData(data) {
+     /* getTreeData(data) {
         // 循环遍历json数据
         for (var i = 0; i < data.length; i++) {
           if (data[i].children.length < 1) {
@@ -120,7 +121,7 @@
           }
         }
         return data;
-      },
+      },*/
       handleSizeChange(val) {
         this.size = val
         this.findAll();
