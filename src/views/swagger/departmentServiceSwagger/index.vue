@@ -1,7 +1,7 @@
 <template>
   <div id="DepartmentSwagger">
-    <iframe src="http://localhost:8002/swagger-ui.html" id="mobsf"
-            frameborder="0" style="position:absolute;"></iframe>
+      <iframe src="http://localhost:8002/swagger-ui.html" id="mobsf"
+              frameborder="0" style="position:absolute;"></iframe>
   </div>
 </template>
 
