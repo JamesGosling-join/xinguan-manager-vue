@@ -105,23 +105,23 @@
       },
       findCategory() {
         findCategory().then(response => {
-          this.options=response.data
+          this.options = response.data
           //this.options = this.getTreeData(response.data)
         })
       },
-     /* getTreeData(data) {
-        // 循环遍历json数据
-        for (var i = 0; i < data.length; i++) {
-          if (data[i].children.length < 1) {
-            // children若为空数组，则将children设为undefined
-            data[i].children = undefined;
-          } else {
-            // children若不为空数组，则继续 递归调用 本方法
-            this.getTreeData(data[i].children);
-          }
-        }
-        return data;
-      },*/
+      /* getTreeData(data) {
+         // 循环遍历json数据
+         for (var i = 0; i < data.length; i++) {
+           if (data[i].children.length < 1) {
+             // children若为空数组，则将children设为undefined
+             data[i].children = undefined;
+           } else {
+             // children若不为空数组，则继续 递归调用 本方法
+             this.getTreeData(data[i].children);
+           }
+         }
+         return data;
+       },*/
       handleSizeChange(val) {
         this.size = val
         this.findAll();
@@ -165,9 +165,7 @@
             {
               name: '库存量',
               type: 'bar',
-              data: Array.from(this.page.data.records, ({name, stock}) => {
-                return {name: name, value: stock}
-              }),
+              data: Array.from(this.page.data.records, ({name, stock}) => ({name: name, value: stock})),
               showBackground: true,
               itemStyle: {
                 //通常情况下：
@@ -246,9 +244,7 @@
               type: "pie",
               radius: "55%",
               center: ["40%", "50%"],
-              data: Array.from(this.page.data.records, ({name, stock}) => {
-                return {name: name, value: stock}
-              }),
+              data: Array.from(this.page.data.records, ({name, stock}) => ({name: name, value: stock})),
               emphasis: {
                 itemStyle: {
                   shadowBlur: 10,
